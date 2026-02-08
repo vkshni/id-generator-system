@@ -1,20 +1,16 @@
-# ID Generator
-
-counter = 0
-
-class IDGenerator:
-
-    def __init__(self):
-        self.counter = 0
-
-    def generate(self):
-
-        self.counter += 1
-        return f"{self.counter:05d}"
+from engine import IDGenerator
 
 idg = IDGenerator()
 
-print(idg.generate())
-print(idg.generate())
-print(idg.generate())
-print(idg.generate())
+while True:
+
+    try:
+
+        action = input("Generate? (y/n): ")
+
+        if action != "y":
+            break
+
+        print(idg.generate())
+    except ValueError:
+        print("INVALID INPUT!")
