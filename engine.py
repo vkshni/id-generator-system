@@ -26,7 +26,7 @@ class JSONFile:
                 return data
             
         except Exception as e:
-            print(f"[SOME ERROR OCCURED] : {str(e)}")
+            return f"[SOME ERROR OCCURED] : {str(e)}"
         
 
     def write_all(self, data):
@@ -37,7 +37,7 @@ class JSONFile:
                 json.dump(data, f, indent = 4)
                 return True
         except Exception as e:
-            print(f"[SOME ERROR OCCURED] : {str(e)}")
+            return f"[SOME ERROR OCCURED] : {str(e)}"
 
             
     def get_counter(self):
@@ -47,8 +47,7 @@ class JSONFile:
 
             return data["counter"]
         except Exception as e:
-            print(f"[SOME ERROR OCCURED] : {str(e)}")
-
+            return f"[SOME ERROR OCCURED] : {str(e)}"
     
     def update_counter(self, new_value):
 
@@ -81,5 +80,24 @@ class IDGenerator:
             return f"{counter:05d}"
         
         except:
-            print(f"SOME ERROR OCCURED, Try again later...")
+            return f"SOME ERROR OCCURED, Try again later..."
+        
+    def set_counter_zero(self):
+
+        try:
+
+            data = self.json.read_all()
+
+            if data is None:
+                return False
+            
+            data["counter"] = 0
+            self.json.write_all(data)
+
+            return None
+        
+        except:
+            return f"SOME ERROR OCCURED, Try again later..."
+        
+
 
