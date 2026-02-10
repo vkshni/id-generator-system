@@ -2,15 +2,16 @@ from engine import IDGenerator
 
 idg = IDGenerator()
 
-while True:
-
-    try:
+def main():
+    while True:
 
         action = input("Generate? (y/n): ")
 
         if action != "y":
             break
 
-        print(idg.generate())
-    except ValueError:
-        print("INVALID INPUT!")
+        id_type = input("ID Type (order, user, invoice): ")
+
+        print(idg.generate(id_type))
+
+main()

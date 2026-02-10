@@ -1,4 +1,22 @@
 {
-    "start_value": 1000,
-    "increment_step": 1
+    "id_types": {
+        "order": {
+            "start_value": 1000,
+            "increment_step": 1,
+            "prefix": "ORD-",
+            "padding": 10
+        },
+        "user": {
+            "start_value": 1000,
+            "increment_step": 1,
+            "prefix": "USER-",
+            "padding": 10
+        },
+        "invoice": {
+            "start_value": 1000,
+            "increment_step": 1,
+            "prefix": "INV-",
+            "padding": 10
+        }
+    }
 }
