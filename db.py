@@ -60,6 +60,16 @@ class CounterFile:
     "invoice": start_values["invoice"]
 }
         return data
+
+    def add_counter(self, new_id_type):
+        
+        data = self.json_handler.read_all()
+        for id_type, config in new_id_type.items():
+            data[id_type] = config["start_value"]
+        
+        self.json_handler.write_all(data)
+        
+        return True
                
 
 # Configuration
@@ -134,3 +144,22 @@ class ConfigFile:
     }
 }
         return data
+    
+    def add_config(self, new_id_type: dict):
+
+        data = self.json_handler.read_all()
+        for id_type, config in new_id_type.items():
+            data["id_types"][id_type] = config
+        
+
+        self.json_handler.write_all(data)
+        return True
+    
+    def update_config(self, id_type, updated_config):
+
+        data = self.json_handler.read_all()
+        for key, value in updated_config.items():
+            data["id_types"][id_type][key] = value
+
+        self.json_handler.write_all(data)
+        return True
