@@ -71,6 +71,23 @@ class CounterFile:
         
         return True
                
+    def delete_counter(self, id_type):
+
+        data = self.json_handler.read_all()
+        del data[id_type]
+
+        self.json_handler.write_all(data)
+        return True
+    
+    def reset_counter(self, id_type, start_value):
+
+        data = self.json_handler.read_all()
+
+        data[id_type] = start_value
+        self.json_handler.write_all(data)
+        return True
+
+        
 
 # Configuration
 
@@ -104,8 +121,8 @@ class ConfigFile:
     def get_id_type_info(self, id_type):
 
         data = self.json_handler.read_all()
-        info = data["id_types"][id_type]
-        return info
+        config = data["id_types"][id_type]
+        return config
 
     def get_increment_step(self, id_type):
 
@@ -162,4 +179,13 @@ class ConfigFile:
             data["id_types"][id_type][key] = value
 
         self.json_handler.write_all(data)
+        return True
+    
+    def delete_id_type(self, id_type):
+
+        data = self.json_handler.read_all()
+        del data["id_types"][id_type]
+
+        self.json_handler.write_all(data)
+
         return True

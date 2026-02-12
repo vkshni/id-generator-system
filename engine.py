@@ -12,18 +12,18 @@ class IDGenerator:
 
         try:
 
-            data = self.counter.json_handler.read_all()
-            info = self.config.get_id_type_info(id_type)
+            counter_data = self.counter.json_handler.read_all()
+            config_data = self.config.get_id_type_info(id_type)
 
-            if data is None:
+            if counter_data is None:
                 return False
             
-            data[id_type] += info["increment_step"]
+            counter_data[id_type] += config_data["increment_step"]
             
-            self.counter.json_handler.write_all(data)
-            counter = data[id_type]
-            prefix = info["prefix"]
-            padding = int(info["padding"])
+            self.counter.json_handler.write_all(counter_data)
+            counter = counter_data[id_type]
+            prefix = config_data["prefix"]
+            padding = int(config_data["padding"])
 
             return f"{prefix}{counter:0{padding}d}"
         
@@ -32,8 +32,8 @@ class IDGenerator:
         
     def add_id_type(self, id_type, start_value, increment_step, prefix, padding):
 
-        data = self.config.json_handler.read_all()
-        if id_type in data["id_types"]:
+        config_data = self.config.json_handler.read_all()
+        if id_type in config_data["id_types"]:
             raise ValueError(f"ID Type{id_type} exists...")
         
         new_id_type = {
@@ -52,13 +52,49 @@ class IDGenerator:
     
     def update_id_type(self, id_type, **kwrgs):
         
-        data = self.config.json_handler.read_all()
-        if not id_type in data["id_types"]:
-            raise ValueError(f"ID type{id_type} doesn't exist...")
+        config_data = self.config.json_handler.read_all()
+        if not id_type in config_data["id_types"]:
+            raise ValueError(f"ID type '{id_type}' not found")
         
         updated_config = kwrgs
         self.config.update_config(id_type, updated_config)
 
+        return True
+    
+    def delete_id_type(self, id_type, force = False):
+
+        config_data = self.config.json_handler.read_all()
+        if not id_type in config_data["id_types"]:
+            raise ValueError(f"ID type '{id_type}' not found")
+        
+        counter_data = self.counter.json_handler.read_all()
+        current_count = counter_data.get(id_type, 0)
+        start_value = config_data["id_types"][id_type]["start_value"]
+
+        if current_count > start_value and not force:
+            ids_generated = current_count - start_value
+            raise ValueError(f"Cannot delete ID - {ids_generated} IDs generated")
+        
+        self.config.delete_id_type(id_type)
+        self.counter.delete_counter(id_type)
+
+        return True
+    
+    def reset_counter(self, id_type, force = False):
+
+        config_data = self.config.json_handler.read_all()
+        if not id_type in config_data["id_types"]:
+            raise ValueError(f"ID type '{id_type}' not found")
+        
+        counter_data = self.counter.json_handler.read_all()
+        current_count = counter_data.get(id_type, 0)
+        start_value = config_data["id_types"][id_type]["start_value"]
+
+        if current_count > start_value and not force:
+            ids_generated = current_count - start_value
+            raise ValueError(f"Cannot delete ID - {ids_generated} IDs generated")
+        
+        self.counter.reset_counter(id_type, start_value)
         return True
 
 
