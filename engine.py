@@ -1,4 +1,5 @@
 from db import CounterFile, ConfigFile
+from keyword import kwlist
 
 # ID Generator
 
@@ -32,6 +33,8 @@ class IDGenerator:
         
     def add_id_type(self, id_type, start_value, increment_step, prefix, padding):
 
+        self.validate_id_type_name(id_type)
+
         config_data = self.config.json_handler.read_all()
         if id_type in config_data["id_types"]:
             raise ValueError(f"ID Type{id_type} exists...")
@@ -51,6 +54,8 @@ class IDGenerator:
         return True
     
     def update_id_type(self, id_type, **kwrgs):
+
+        self.validate_id_type_name(id_type)
         
         config_data = self.config.json_handler.read_all()
         if not id_type in config_data["id_types"]:
@@ -62,6 +67,8 @@ class IDGenerator:
         return True
     
     def delete_id_type(self, id_type, force = False):
+
+        self.validate_id_type_name(id_type)
 
         config_data = self.config.json_handler.read_all()
         if not id_type in config_data["id_types"]:
@@ -81,6 +88,8 @@ class IDGenerator:
         return True
     
     def reset_counter(self, id_type, force = False):
+        
+        self.validate_id_type_name(id_type)
 
         config_data = self.config.json_handler.read_all()
         if not id_type in config_data["id_types"]:
@@ -92,9 +101,25 @@ class IDGenerator:
 
         if current_count > start_value and not force:
             ids_generated = current_count - start_value
-            raise ValueError(f"Cannot delete ID - {ids_generated} IDs generated")
+            raise ValueError(f"Cannot reset ID - {ids_generated} IDs generated")
         
         self.counter.reset_counter(id_type, start_value)
+        return True
+    
+    def validate_id_type_name(self, id_type):
+
+        if not id_type or id_type.isspace():
+            raise ValueError("Empty ID")
+        
+        if not all(c.isalnum() or c == "_" for c in id_type):
+            raise ValueError("Only alphanumeric and underscore allowed")
+        
+        if len(id_type) < 3 or len(id_type) > 50:
+            raise ValueError("Length of name should be lesser than 50 and greater or equal to 3")
+        
+        if id_type in kwlist:
+            raise ValueError("Reserved words cannot be used")
+        
         return True
 
 
