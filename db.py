@@ -6,10 +6,13 @@ BASE_DIR = Path(__file__).parent
 
 class JSONFile:
 
-    def __init__(self, file_name):
+    def __init__(self, file_name: str) -> None:
+        """JSONFile Constructor"""
+
         self.file_path = self.create_file(BASE_DIR, file_name)
 
-    def create_file(self, BASE_DIR, file_name):
+    def create_file(self, BASE_DIR: str, file_name: str) -> str:
+        """Creates file if file doesn't exists"""
 
         path = BASE_DIR / file_name
         if not path.exists():
@@ -17,7 +20,7 @@ class JSONFile:
                 pass
         return path
     
-    def read_all(self):
+    def read_all(self) -> dict:
 
         with open(self.file_path, "r") as f:
 
