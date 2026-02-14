@@ -3,8 +3,8 @@
         "order": {
             "start_value": 1000,
             "increment_step": 1,
-            "prefix": "ORD-",
-            "padding": 10
+            "prefix": "ORDER-",
+            "padding": 12
         },
         "user": {
             "start_value": 1000,
@@ -17,6 +17,12 @@
             "increment_step": 1,
             "prefix": "INV-",
             "padding": 10
+        },
+        "product": {
+            "start_value": 5000,
+            "increment_step": 1,
+            "prefix": "PROD-",
+            "padding": 8
         }
     }
 }

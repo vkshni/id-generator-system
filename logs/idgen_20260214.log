@@ -7,3 +7,68 @@
 2026-02-14 15:43:38 | INFO | Added ID type: 'product' with prefix 'PROD-'
 2026-02-14 15:45:13 | ERROR | Invalid Name for ID type: 'pro94#'
 2026-02-14 15:51:08 | INFO | Listed 4 ID types
+2026-02-14 16:12:42 | INFO | Generated ID: ORD-0000001001 for type 'order'
+2026-02-14 16:12:42 | INFO | Generated ID: ORD-0000001002 for type 'order'
+2026-02-14 16:12:42 | INFO | Added ID type: 'product' with prefix 'PROD-'
+2026-02-14 16:12:42 | INFO | Listed 4 ID types
+2026-02-14 16:12:42 | WARNING | Failed to add ID type 'order': already exists
+2026-02-14 16:12:42 | ERROR | Invalid Name for ID type: 'my order'
+2026-02-14 16:12:42 | INFO | Updated ID type: 'order' with new config '{'prefix': 'ORDER-', 'padding': 12}'
+2026-02-14 16:12:42 | INFO | Listed 4 ID types
+2026-02-14 16:12:42 | INFO | Added ID type: 'temp' with prefix 'TMP-'
+2026-02-14 16:12:42 | INFO | Deleted ID type: 'temp'
+2026-02-14 16:12:42 | INFO | Listed 4 ID types
+2026-02-14 16:12:42 | INFO | Generated ID: ORDER-000000001003 for type 'order'
+2026-02-14 16:12:42 | INFO | Generated ID: ORDER-000000001004 for type 'order'
+2026-02-14 16:12:42 | INFO | Generated ID: ORDER-000000001005 for type 'order'
+2026-02-14 16:12:42 | INFO | Reset counter for ID type: 'order'
+2026-02-14 16:12:42 | INFO | Listed 4 ID types
+2026-02-14 16:12:42 | INFO | Listed 4 ID types
+2026-02-14 16:12:42 | INFO | Generated ID: ORDER-000000001001 for type 'order'
+2026-02-14 16:12:42 | INFO | Listed 4 ID types
+2026-02-14 16:12:42 | INFO | Generated ID: ORDER-000000001002 for type 'order'
+2026-02-14 16:12:42 | INFO | Listed 4 ID types
+2026-02-14 16:36:20 | ERROR | Invalid Name for ID type: 'my order'
+2026-02-14 16:48:37 | INFO | Generated ID: ORD-0000001001 for type 'order'
+2026-02-14 16:48:37 | INFO | Generated ID: ORD-0000001002 for type 'order'
+2026-02-14 16:48:37 | INFO | Added ID type: 'product' with prefix 'PROD-'
+2026-02-14 16:48:37 | INFO | Listed 4 ID types
+2026-02-14 16:48:37 | WARNING | Failed to add ID type 'order': already exists
+2026-02-14 16:48:37 | ERROR | Invalid Name for ID type: 'my order'
+2026-02-14 16:48:37 | INFO | Updated ID type: 'order' with new config '{'prefix': 'ORDER-', 'padding': 12}'
+2026-02-14 16:48:37 | INFO | Listed 4 ID types
+2026-02-14 16:48:37 | INFO | Added ID type: 'temp' with prefix 'TMP-'
+2026-02-14 16:48:37 | INFO | Deleted ID type: 'temp'
+2026-02-14 16:48:37 | INFO | Listed 4 ID types
+2026-02-14 16:48:37 | INFO | Generated ID: ORDER-000000001003 for type 'order'
+2026-02-14 16:48:37 | INFO | Generated ID: ORDER-000000001004 for type 'order'
+2026-02-14 16:48:37 | INFO | Generated ID: ORDER-000000001005 for type 'order'
+2026-02-14 16:48:37 | INFO | Reset counter for ID type: 'order'
+2026-02-14 16:48:37 | INFO | Listed 4 ID types
+2026-02-14 16:48:37 | INFO | Listed 4 ID types
+2026-02-14 16:48:37 | INFO | Generated ID: ORDER-000000001001 for type 'order'
+2026-02-14 16:48:37 | INFO | Listed 4 ID types
+2026-02-14 16:48:37 | INFO | Generated ID: ORDER-000000001002 for type 'order'
+2026-02-14 16:48:37 | INFO | Listed 4 ID types
+2026-02-14 16:50:58 | INFO | Generated ID: ORD-0000001001 for type 'order'
+2026-02-14 16:50:58 | INFO | Generated ID: ORD-0000001002 for type 'order'
+2026-02-14 16:50:58 | INFO | Added ID type: 'product' with prefix 'PROD-'
+2026-02-14 16:50:58 | INFO | Listed 4 ID types
+2026-02-14 16:50:58 | WARNING | Failed to add ID type 'order': already exists
+2026-02-14 16:50:58 | ERROR | Invalid Name for ID type: 'my order'
+2026-02-14 16:50:58 | INFO | Updated ID type: 'order' with new config '{'prefix': 'ORDER-', 'padding': 12}'
+2026-02-14 16:50:58 | INFO | Listed 4 ID types
+2026-02-14 16:50:58 | INFO | Added ID type: 'temp' with prefix 'TMP-'
+2026-02-14 16:50:58 | INFO | Deleted ID type: 'temp'
+2026-02-14 16:50:58 | INFO | Listed 4 ID types
+2026-02-14 16:50:58 | INFO | Generated ID: ORDER-000000001003 for type 'order'
+2026-02-14 16:50:58 | INFO | Generated ID: ORDER-000000001004 for type 'order'
+2026-02-14 16:50:58 | INFO | Generated ID: ORDER-000000001005 for type 'order'
+2026-02-14 16:50:58 | INFO | Reset counter for ID type: 'order'
+2026-02-14 16:50:58 | INFO | Listed 4 ID types
+2026-02-14 16:50:58 | INFO | Listed 4 ID types
+2026-02-14 16:50:58 | INFO | Generated ID: ORDER-000000001001 for type 'order'
+2026-02-14 16:50:58 | INFO | Listed 4 ID types
+2026-02-14 16:50:58 | INFO | Generated ID: ORDER-000000001002 for type 'order'
+2026-02-14 16:50:58 | INFO | Listed 4 ID types
+2026-02-14 16:52:29 | INFO | Listed 4 ID types

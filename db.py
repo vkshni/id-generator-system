@@ -124,7 +124,7 @@ class ConfigFile:
     def get_id_type_info(self, id_type):
 
         data = self.json_handler.read_all()
-        config = data["id_types"][id_type]
+        config = data["id_types"].get(id_type, None)
         return config
 
     def get_increment_step(self, id_type):
