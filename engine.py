@@ -12,11 +12,14 @@ class IDGenerator:
     """
     Generates unique sequential IDs with configurable prefixes and padding.
     
-    Supports multiple ID types (order, user, invoice) with independent counters.
+    Supports multiple ID types (order, user, invoice..) with independent counters.
     Persists state to JSON files for durability across restarts.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """
+        ID Generator Constructor
+        """
 
         self.counter = CounterFile()
         self.config = ConfigFile()
@@ -31,7 +34,10 @@ class IDGenerator:
             id_type (str): Name of the ID type (e.g. "order", "user")
             
         Returns:
-            str: Generated ID
+            result (str): Generated ID
+
+        Raises:
+            IDTypeNotFoundError: if ID type not found
         """
 
         with self.lock:
@@ -60,7 +66,23 @@ class IDGenerator:
             return result
             
         
-    def add_id_type(self, id_type, start_value, increment_step, prefix, padding):
+    def add_id_type(self, id_type: str, start_value: int, increment_step: int, prefix: str, padding: int) -> bool:
+        """
+        Adds new id type
+        
+        Args:
+            id_type (str): Name of the ID type (e.g. "order", "user")
+            start_value (int): Starting value of the counter (e.g. 1000)
+            increment_step (int): Steps to increase after each ID generation (e.g. 1,5)
+            prefix (str): Prefix in each ID generated (e.g. USER-, ORD-)
+            padding (int): Padding IDs with given length by 0s (e.g. 00001023)
+            
+        Returns:
+            True (bool): Success
+
+        Raises:
+            IDTypeExistsError: if ID type already exists
+        """
 
         with self.lock:
 
@@ -87,7 +109,20 @@ class IDGenerator:
 
             return True
     
-    def update_id_type(self, id_type, **kwrgs):
+    def update_id_type(self, id_type: str, **kwrgs: dict) -> bool:
+        """
+        Updates ID type with given changes
+        
+        Args:
+            id_type (str): Name of the ID type (e.g. "order", "user")
+            **kwrgs (dict): Keyword arguments (e.g. name = "product", padding = 8)
+            
+        Returns:
+            True (bool): Success
+
+        Raises:
+            IDTypeNotFoundError: if ID type not found
+        """
 
         with self.lock:
 
@@ -105,7 +140,21 @@ class IDGenerator:
 
             return True
     
-    def delete_id_type(self, id_type, force = False):
+    def delete_id_type(self, id_type: str, force: bool = False) -> bool:
+        """
+        Deletes ID type
+        
+        Args:
+            id_type (str): Name of the ID type (e.g. "order", "user")
+            force (bool): By default False, but can be True to force delete
+            
+        Returns:
+            True (bool): Success
+
+        Raises:
+            IDTypeNotFoundError: if ID type not found
+            CounterResetError: if trying to reset the counter
+        """
 
         with self.lock:
 
@@ -133,6 +182,20 @@ class IDGenerator:
             return True
     
     def reset_counter(self, id_type: str, force: bool = False) -> bool:
+        """
+        Resets the counter to the start_value of the ID type
+        
+        Args:
+            id_type (str): Name of the ID type (e.g. "order", "user")
+            force (bool): By default False, but can be True to force reset
+        
+        Returns:
+            True (bool): Success
+
+        Raises:
+            IDTypeNotFoundError: if ID type not found
+            CounterResetError: if trying to reset the counter
+        """
 
         with self.lock:
         
@@ -158,7 +221,7 @@ class IDGenerator:
             return True
     
     def validate_id_type_name(self, id_type: str) -> bool:
-        """Validates ID type names, throws ValueError if invalid"""
+        """Validates ID type names, throws Errors if invalid"""
 
         if not id_type or id_type.isspace():
             self.logger.error(f"Invalid Name for ID type: '{id_type}'")
@@ -178,7 +241,16 @@ class IDGenerator:
         
         return True
 
-    def generate_password(self, pwd_len: int = 4):
+    def generate_password(self, pwd_len: int = 4) -> str:
+        """
+        Generates random password for given length
+        
+        Args:
+            pwd_len (int): Length of the password (By default 4)
+        
+        Returns:
+            password (str): Generated password
+        """
 
         lower = string.ascii_lowercase
         upper = string.ascii_uppercase
@@ -203,13 +275,14 @@ class IDGenerator:
 
         return password
 
-    def list_id_types(self):
+    def list_id_types(self) -> list[dict]:
         """
         List all ID types with their current status.
         
         Returns:
             list: List of dicts with id_type info
         """
+        
         with self.lock:
             config_data = self.config.json_handler.read_all()
             counter_data = self.counter.json_handler.read_all()
